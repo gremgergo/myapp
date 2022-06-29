@@ -10,26 +10,40 @@ class Timer extends React.Component {
         setInterval(() => {
             this.incrementTimer()
         }, 1000)
-    }
 
+        console.log('constructor called')
+
+    };
+
+    componentDidMount() {
+        console.log('componen created')
+    };
+
+    componentDidUpdate() { // olyan logikat kell irni amit akkor szeretnenk lefutattni ha megvaltozik a componens allapota
+        console.log('something changed')
+        if(this.state.time === 5) {}
+    };
+
+    componentWillUnmount() {
+        console.log('csinalunk valamit tenylegesen')
+    };
 
     incrementTimer() {
         this.setState({
             time: this.state.time+1
         })
-    }
+    };
 
     render() { // ezt hivja meg a react 
-        console.log('render done')
         return(
             <> 
-                <div>
+                <div className={(this.state.time >= 5) ? 'blue' : ''}>
                     {this.state.time}
                 </div>
-                <button onClick={() => {this.incrementTimer()}}>click me</button>
+                <button onClick={() => { this.incrementTimer() }}>click me</button>
             </>
         ) 
-    }
+    };
 }
 
 export default Timer
