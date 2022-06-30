@@ -6,12 +6,24 @@ export default function Timer2() {
   const [time2, setTime] = useState(0);
   const [countryName, setCountryName] = useState("");
   const [country, setCountry] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => { // valtozas esemenykezeloje
+  useEffect(() => {
+    setLoading(true);
+    fetch(`https://restcountries.com/v3.1/name/hungary`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    // valtozas esemenykezeloje
     console.log("time changed");
   }, [time2]);
 
-  useEffect(() => { 
+  useEffect(() => {
     async function fetchData() {
       // You can await here
       let response = await fetch(
@@ -22,11 +34,12 @@ export default function Timer2() {
       setCountry(data[0].name.nativeName[data[0].cca3.toLowerCase()].common);
     }
     if (countryName !== "") {
-        fetchData();
+      fetchData();
     }
   }, [countryName]);
 
   return (
+    loading ? <div>loading...</div> :
     <>
       <div>{time2}</div>
       <input
