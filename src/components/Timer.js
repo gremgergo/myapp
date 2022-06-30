@@ -7,21 +7,21 @@ class Timer extends React.Component {
             time: 0
         }
         
+        
+        console.log('constructor called')
+        
+    };
+    
+    componentDidMount() {
+        console.log('componen created')
+        
         setInterval(() => {
             this.incrementTimer()
         }, 1000)
-
-        console.log('constructor called')
-
-    };
-
-    componentDidMount() {
-        console.log('componen created')
     };
 
     componentDidUpdate() { // olyan logikat kell irni amit akkor szeretnenk lefutattni ha megvaltozik a componens allapota
         console.log('something changed')
-        if(this.state.time === 5) {}
     };
 
     componentWillUnmount() {

@@ -1,6 +1,6 @@
 // rfc ->
 
-import React, { useState } from 'react' // useState az egy 'hook', ezeket hasznaljuk a reactben | mindig legkulso szintjen hivhato meg.
+import React, { useEffect, useState } from 'react' // useState az egy 'hook', ezeket hasznaljuk a reactben | mindig legkulso szintjen hivhato meg.
 
 export default function Timer2() {
     function incrementTimer() {
@@ -10,6 +10,22 @@ export default function Timer2() {
     };
 
     const [time, setTime] = useState(0);
+
+    useEffect(() => {
+        console.log('new interval set')
+
+        const intervalId = setInterval(() => {
+
+            incrementTimer()
+        }, 1000)
+
+        return () => {
+
+            clearInterval(intervalId)
+        }
+ 
+    });
+    
 
     return (
         <> 
